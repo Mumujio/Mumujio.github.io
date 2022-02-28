@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="浏览器的运行机制详解进程与线程进程与线程基本概念 进程*&gt;工厂 （有系统分配的独立的资源；相互独立，无法读到对方内存中的数据） 线程*&gt;工人 （协同；信息互通） 一个进程中有多个进程；系统以线程为单位分配 cpu 中的核；系统以进程为最小单位分配内存空间；进程之间也能互相通信，不过代价比较大  浏览器的进程 Browser 进程（ 是浏览器的主进程，负责主控，协调，只有一个，可以看做是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器的执行机制">
+<meta property="og:url" content="http://example.com/2022/02/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="木木卓的小窝">
+<meta property="og:description" content="浏览器的运行机制详解进程与线程进程与线程基本概念 进程*&gt;工厂 （有系统分配的独立的资源；相互独立，无法读到对方内存中的数据） 线程*&gt;工人 （协同；信息互通） 一个进程中有多个进程；系统以线程为单位分配 cpu 中的核；系统以进程为最小单位分配内存空间；进程之间也能互相通信，不过代价比较大  浏览器的进程 Browser 进程（ 是浏览器的主进程，负责主控，协调，只有一个，可以看做是">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-02-26T14:03:20.000Z">
+<meta property="article:modified_time" content="2022-02-26T14:04:46.955Z">
+<meta property="article:author" content="林卓">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/2022/02/26/浏览器的执行机制/"/>
+
+
+
+
+
+  <title>浏览器的执行机制 | 木木卓的小窝</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">木木卓的小窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/26/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://tse1-mm.cn.bing.net/th/id/R-C.8d895e16bbb22a83310865f234dd9f3f?rik=VxdPPnUQI85owQ&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20191230%2fa7b693fd6434409585045f5887583e7c.jpeg&ehk=0aIPIvL4wupp6ImoUjS%2fxpd0ULtX5T6li3I%2fbywpfHo%3d&risl=&pid=ImgRaw&r=0">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木木卓的小窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浏览器的执行机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-26T22:03:20+08:00">
+                2022-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%95%B4%E7%90%86%EF%BC%89/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记（第一次整理）</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浏览器的运行机制详解"><a href="#浏览器的运行机制详解" class="headerlink" title="浏览器的运行机制详解"></a>浏览器的运行机制详解</h1><h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="进程与线程基本概念"><a href="#进程与线程基本概念" class="headerlink" title="进程与线程基本概念"></a>进程与线程基本概念</h3><ol>
+<li>进程*&gt;工厂 （有系统分配的独立的资源；相互独立，无法读到对方内存中的数据）</li>
+<li>线程*&gt;工人 （协同；信息互通）</li>
+<li>一个进程中有多个进程；系统以线程为单位分配 cpu 中的核；系统以进程为最小单位分配内存空间；进程之间也能互相通信，不过代价比较大</li>
+</ol>
+<h3 id="浏览器的进程"><a href="#浏览器的进程" class="headerlink" title="浏览器的进程"></a>浏览器的进程</h3><ol>
+<li>Browser 进程（ 是浏览器的主进程，负责主控，协调，只有一个，可以看做是浏览器的大脑）<ol>
+<li>负责下载页面的网络文件</li>
+<li>负责将 renderer 进程得到的存在内存中的位图渲染（显示）到页面上</li>
+<li>负责创建和销毁 tab 进程（renderer 进程）</li>
+<li><strong>负责与用户的交互</strong></li>
+</ol>
+</li>
+<li>GPU 进程（只有一个）</li>
+<li>负责 3D 绘制。只有当该页面使用了硬件加速才会使用它，来渲染（显示）页面，否则的话，不使用这个进程，而是用 Browser 进程来渲染（显示）页面</li>
+<li>renderer 进程 （又名<strong>浏览器内核</strong>，<strong>每个 tab 页面对应一个独立的 renderer 进程</strong>。多线程）</li>
+<li><strong>负责脚本执行</strong>，位图绘制，事件触发，任务队列轮询等</li>
+<li>第三方插件进程：每种类型的插件对应一个进程</li>
+<li>常驻线程：</li>
+<li><strong>js 引擎线程</strong>：也称 js 内核，解析 js 脚本，执行代码；与 GUI 线程互斥，当 js 引擎线程结束运行时，才会继续运行 GUI 线程；由一个主线程和多个 web worker 线程组成</li>
+<li>GUI 渲染线程：<strong>用于解析 html 为 DOM 树，解析 css 为 CSSOM 树</strong>，布局 layout，绘制 paint,当页面需要重排 reflow，重绘 repaint 时，使 用该线程</li>
+<li>事件触发线程: 当对应事件触发，该线程会将事件对应的回调函数放入 callback queue（任务队列）中，等待 js 引擎线程的处理</li>
+<li>定时触发线程: 如果该状态变更事件对应有回调函数的话，则放入任务队列中</li>
+<li>任务队列轮询线程: 于轮询监听任务队列，以知道任务队列是否为空</li>
+</ol>
+<h2 id="html-的解析"><a href="#html-的解析" class="headerlink" title="html 的解析"></a>html 的解析</h2><ul>
+<li>html 解析包含有一系列的步骤，过程为 Bytes *&gt; Characters *&gt; Tokens *&gt; Nodes *&gt; DOM。最终将 html 解析为 DOM 树。</li>
+</ul>
+<h2 id="css-解析"><a href="#css-解析" class="headerlink" title="css 解析"></a>css 解析</h2><ul>
+<li>他解析最终形成 CSSOM 树，过程为 Bytes *&gt; Characters *&gt; Tokens *&gt; Nodes *&gt; CSSOM</li>
+</ul>
+<h2 id="render-树"><a href="#render-树" class="headerlink" title="render 树"></a>render 树</h2><ul>
+<li>由 DOM 树与 CSS 树结合形成的渲染树<strong>（其中无法显示的元素，如 script，head 元素或 diplay：none 的元素，不会在渲染树中，也就最终不会被渲染出来）</strong>，页面的布局，绘制都是以 render 树为依据</li>
+</ul>
+<h2 id="回流与重绘"><a href="#回流与重绘" class="headerlink" title="回流与重绘"></a>回流与重绘</h2><ul>
+<li>布局是页面首次加载时进行的操作，_重新布局即为回流_。</li>
+<li>绘制是页面首次加载时进行的操作，_重新绘制即为重绘_。</li>
+<li>当页面的某部分元素发生了<strong>尺寸、位置、隐藏发生了改变，页面进行回流</strong>。得对整个页面重新进行布局计算，将所有尺寸，位置受到影响的元素回流。 * 当页面的某部分<strong>元素的外观发生了改变，但尺寸、位置、隐藏没有改变，页面进行重绘</strong>。（同样，只重绘部分元素，而不是整个页面重绘）</li>
+<li>引起回流的原因：</li>
+</ul>
+<ol>
+<li>*** 页面初始化渲染 * 窗口的尺寸变化 * 元素的尺寸、位置、隐藏变化 * DOM 结构发生变化，如删除节点 * 获取某些属性，引发回流 * 很多浏览器会对回流进行优化，一定时间段后或数量达到阕值时，做一次批处理回流。**</li>
+<li><strong>当获取一些属性时，浏览器为了返回正确的值也会触发回流，导致浏览器优化无效，字体大小修改及内容更新也会导致回流。频繁的回流与重绘会导致频繁的页面渲染，导致 cpu 或 gpu 过量使用，使得页面卡顿</strong></li>
+</ol>
+<ul>
+<li>如何减少回流：</li>
+</ul>
+<ol>
+<li>减少逐项更改样式，最好一次性更改 style，或是将更改的样式定义在 class 中并一次性更新</li>
+<li>避免循环操作 DOM，而是新建一个节点，在他上面应用所有 DOM 操作，然后再将他接入到 DOM 中</li>
+<li>当要频繁得到如 offset 属性时，只读取一次然后赋值给变量，而不是每次都获取一次</li>
+<li>将复杂的元素绝对定位或固定定位，使他脱离文档流，否则回流代价很高</li>
+<li>使用硬件加速创建一个新的复合图层，当其需要回流时不会影响原始复合图层回流<ol>
+<li>DOM 中的每个结点对应一个简单图层 * 复合图层是各个简单图层的合并，一个页面一般来说只有一个复合图层，无论你创建了多少个元素，都 是在这个复合图层中</li>
+<li>当一个元素使用硬件加速后，会生成一个新的复合图层，这样不管其如何变化，都不会影响原复合图层。不过不要大量使用硬件加速，这样不管其如何变化，都不会影响原复合图层。不过不要大量使用硬件加速，会导致资源消耗过度，导致页面也卡。所以，使用了硬件加速后，会有多个复合图层，然后多个复合图层互相独立，单独布局、绘制</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>如何才能使用硬件加速：</li>
+</ul>
+<ol>
+<li>translate3d,translateZ</li>
+<li>opacity 属性<br><strong>注意：硬件加速时请使用 z<em>index：当一个元素使用了硬件加速，在其后的元素，若 z</em>index 比他大或者相同，且 absolute 或 fixed 的属性相同，则默认为这些元素也创建各自的复合图层。所以我们人为地为这个元素添加 z*index 值，从而避免这种情况</strong></li>
+</ol>
+<h2 id="浏览器页面的渲染流程"><a href="#浏览器页面的渲染流程" class="headerlink" title="浏览器页面的渲染流程"></a>浏览器页面的渲染流程</h2><ol>
+<li>解析 html 得到 DOM 树</li>
+<li>解析 css 得到 CSS 树</li>
+<li>合并得到 render 树</li>
+<li>布局，当页面有元素的尺寸、大小、隐藏有变化或增加、删除元素时，重新布局计算，并修改页面中所有受影响的部分</li>
+<li>绘制，当页面有元素的外观发生变化时，重新绘制</li>
+<li>GUI 线程将得到的各层的位图（每个元素对应一个普通图层）发送给 Browser 进程，由 Browser 进程将各层合并，渲染在页面上</li>
+</ol>
+<h2 id="DOMContentLoaded-和-load-事件"><a href="#DOMContentLoaded-和-load-事件" class="headerlink" title="DOMContentLoaded 和 load 事件"></a>DOMContentLoaded 和 load 事件</h2><ul>
+<li>DOMContentLoaded：当 DOM 加载完成触发</li>
+<li>load：当 DOM，样式表，脚本都加载完时触发</li>
+</ul>
+<h3 id="css-的堵塞情况"><a href="#css-的堵塞情况" class="headerlink" title="css 的堵塞情况"></a>css 的堵塞情况</h3><ul>
+<li>由于 css 的下载和解析不会影响 DOM 树，所以不会堵塞 html 文件的解析，但会堵塞页面渲染。</li>
+</ul>
+<h3 id="js-的堵塞情况"><a href="#js-的堵塞情况" class="headerlink" title="js 的堵塞情况"></a>js 的堵塞情况</h3><ul>
+<li>js 文件的下载和解析执行都会堵塞 html 文件的解析及页面渲染。使用 async 属性，这样就可以异步加载 js 文件，加载完成后立即执行</li>
+</ul>
+<h3 id="css-和-js-文件应当放在-html-哪个位置"><a href="#css-和-js-文件应当放在-html-哪个位置" class="headerlink" title="css 和 js 文件应当放在 html 哪个位置"></a>css 和 js 文件应当放在 html 哪个位置</h3><ul>
+<li>如果 js 的内容比较小，则推荐使用内部 js 而不是引用 js，这样可以减少 http 请求。</li>
+</ul>
+<h2 id="导致页面无法立即响应的原因"><a href="#导致页面无法立即响应的原因" class="headerlink" title="导致页面无法立即响应的原因"></a>导致页面无法立即响应的原因</h2><ul>
+<li>导致页面无法响应的原因是执行栈中还有任务未执行完，或者是 js 引擎线程被 GUI 线程堵塞。</li>
+</ul>
+<h2 id="html-文件解析过程"><a href="#html-文件解析过程" class="headerlink" title="html 文件解析过程"></a>html 文件解析过程</h2><p>这个过程是在下载 html 文件之后，不包括网络请求过程</p>
+<ol>
+<li><p>Browser 进程下载 html 文件并将文件发送给 renderer 进程</p>
+</li>
+<li><p>renderer 进程的 GUI 进程开始解析 html 文件来构建出 DOM</p>
+</li>
+<li><p>当遇到外源 css 时，Browser 进程下载该 css 文件并发送回来，GUI 线程再解析该文件，在这同时，html 的解析也同时进行，但不会渲染（还未形成渲染树）</p>
+</li>
+<li><p>当遇到内部 css 时，html 的解析和 css 的解析同时进行</p>
+</li>
+<li><p>继续解析 html 文件，当遇到外源 js 时，Browser 进程下载该 js 文件并发送回来，此时，js 引擎线程解析并执行 js，因为 GUI 线程和 js 引擎线程互斥，所以 GUI 线程被挂起，停止继续解析 html。直到 js 引擎线程空闲，GUI 线程继续解析 html。</p>
+</li>
+<li><p>遇到内部 js 也是同理</p>
+</li>
+<li><p>解析完 html 文件，形成了完整的 DOM 树，也解析完了 css，形成了完整的 CSSOM 树，两者结合形成了 render 树</p>
+</li>
+<li><p>根据 render 树来进行布局，若在布局的过程中发生了元素尺寸、位置、隐藏的变化或增加、删除元素时，则进行回流，修改</p>
+</li>
+<li><p>根据 render 树进行绘制，若在布局的过程中元素的外观发生变换，则进行重绘</p>
+</li>
+<li><p>将布局、绘制得到的各个简单图层的位图发送给 Browser 进程，由它来合并简单图层为复合图层，从而显示到页面上</p>
+</li>
+<li><p>以上步骤就是 html 文件解析全过程，完成之后，如若当页面有元素的尺寸、大小、隐藏有变化时，重新布局计算回流，并修改页面中所有受影响的部分，如若当页面有元素的外观发生变化时，重绘</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>千万不要打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/02/26/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86/" rel="next" title="前端基础知识学习笔记">
+                <i class="fa fa-chevron-left"></i> 前端基础知识学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/26/es6%E7%AC%94%E8%AE%B0/" rel="prev" title="es6笔记">
+                es6笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://tse1-mm.cn.bing.net/th/id/R-C.8d895e16bbb22a83310865f234dd9f3f?rik=VxdPPnUQI85owQ&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20191230%2fa7b693fd6434409585045f5887583e7c.jpeg&ehk=0aIPIvL4wupp6ImoUjS%2fxpd0ULtX5T6li3I%2fbywpfHo%3d&risl=&pid=ImgRaw&r=0"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Mumujio" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">浏览器的运行机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">进程与线程基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">浏览器的进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html-%E7%9A%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">html 的解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css-%E8%A7%A3%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">css 解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#render-%E6%A0%91"><span class="nav-number">1.4.</span> <span class="nav-text">render 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98"><span class="nav-number">1.5.</span> <span class="nav-text">回流与重绘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.</span> <span class="nav-text">浏览器页面的渲染流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOMContentLoaded-%E5%92%8C-load-%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.7.</span> <span class="nav-text">DOMContentLoaded 和 load 事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#css-%E7%9A%84%E5%A0%B5%E5%A1%9E%E6%83%85%E5%86%B5"><span class="nav-number">1.7.1.</span> <span class="nav-text">css 的堵塞情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js-%E7%9A%84%E5%A0%B5%E5%A1%9E%E6%83%85%E5%86%B5"><span class="nav-number">1.7.2.</span> <span class="nav-text">js 的堵塞情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-%E5%92%8C-js-%E6%96%87%E4%BB%B6%E5%BA%94%E5%BD%93%E6%94%BE%E5%9C%A8-html-%E5%93%AA%E4%B8%AA%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.7.3.</span> <span class="nav-text">css 和 js 文件应当放在 html 哪个位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%87%B4%E9%A1%B5%E9%9D%A2%E6%97%A0%E6%B3%95%E7%AB%8B%E5%8D%B3%E5%93%8D%E5%BA%94%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.8.</span> <span class="nav-text">导致页面无法立即响应的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html-%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.</span> <span class="nav-text">html 文件解析过程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林卓</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
