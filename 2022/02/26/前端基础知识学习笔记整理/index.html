@@ -90,7 +90,7 @@
 <meta property="og:image" content="c:/Users/JayZ/blog/public/images/2.png">
 <meta property="og:image" content="c:/Users/JayZ/blog/public/images/3.png">
 <meta property="article:published_time" content="2022-02-26T06:49:35.000Z">
-<meta property="article:modified_time" content="2022-02-28T13:34:32.684Z">
+<meta property="article:modified_time" content="2022-03-01T13:38:31.216Z">
 <meta property="article:author" content="林卓">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -501,7 +501,7 @@
 <li><strong>变量未声明也可以使用，会被变成全局变量</strong></li>
 <li>函数的形参也可以看作是局部变量</li>
 <li>全局变量比较占内存资源，局部变量比较节约资源</li>
-<li>es6 之前无块级作用域：if() for()中定义的变量为全局变量</li>
+<li><strong>es6 之前无块级作用域：if() for()中定义的变量为全局变量</strong></li>
 </ul>
 <h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><ul>
 <li>内部函数可以访问外部函数（访问有就近原则，沿着链查找直到找到为止）<strong>（就近原则）</strong></li>
@@ -711,9 +711,59 @@
 </li>
 <li><em>(JS里面的样式采取驼峰命名法）（JS修改style样式操作，产生的是行内样式，css权重比较高）（className 会直接更改掉原先的类名）</em>*<ul>
 <li>多类名选择器：class=（’ 第一个类名  第二个类名     ‘ ）</li>
+<li>自定义属性的操作：<ol>
+<li>element.属性：获取属性值 (获取的是内置属性）</li>
+<li>element.getAttribute (‘属性’)  （可获取自定义属性）  （自定义属性：程序员自己添加的属性）</li>
+<li>element.属性=’值’：设置属性值（设置内置属性）</li>
+<li>element.setAttribute（’属性’，值）：设置属性值（可设置自定义属性）</li>
+<li>element.removeAttribute(‘属性’)：移除属性</li>
+<li>element.dataset.自定义属性名：获取元素自定义属性 （H5新增）（获取的时候采取驼峰命名法）</li>
+</ol>
+</li>
 </ul>
 </li>
-<li>啦啦啦啦啦啦啦啦啦</li>
+<li><strong>排他思想：干掉所有人（清除所有人的样式），保留我自己（然后自己再添加样式）</strong></li>
+<li><strong>H5规定自定义属性data-开头作为属性名并且赋值</strong></li>
+</ul>
+<h3 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h3><ul>
+<li>可利用节点的父子关系操作，逻辑性强，兼容性较差</li>
+<li>页面中的所有内容都是节点：至少有 nodeType（节点类型）  nodeName（节点名称）  nodeValue（节点值）三个基本属性</li>
+<li>得到节点<ul>
+<li>父节点 element.parentNode：得到的是离元素最近的父级节点（如果指定节点没有父节点，就放回null）</li>
+<li>子节点 element.childNodes：得到的是子节点的集合<strong>（包含元素节点，文本节点，如果只想获得里面的元素节点需要专门处理，不推荐）</strong></li>
+<li>子节点 element.children：获取<strong>子元素节点集合</strong> （只获得元素节点）</li>
+<li>parentNode.firstChild：获取第一个子节点（包括文本节点和元素节点等）</li>
+<li>parentNode.lastChild：获取最后一个子节点（包括文本节点和元素节点等）</li>
+<li>parentNode.firstElementChild：获取第一个子元素节点 （IE9以上才能用）</li>
+<li>parentNode.lastElementChild：获取最后一个子元素节点（IE9以上才能用）</li>
+<li>node.nextSibling：得到下一个兄弟节点（包括文本节点和元素节点等）</li>
+<li>node.previousSibling：得到上一个兄弟节点（包括文本节点和元素节点等）</li>
+<li>node.nextElementSibing：得到下一个兄弟<strong>元素节点</strong>（IE9以上才能用）</li>
+<li>node.previousElementSibing：得到上一个兄弟<strong>元素节点</strong>（IE9以上才能用）</li>
+</ul>
+</li>
+<li>页面中添加一个新的元素：<ol>
+<li>创建元素</li>
+<li>添加元素</li>
+</ol>
+</li>
+<li>创建节点<ul>
+<li>document.createElement (‘tagName’)：创建一个节点（动态创建的，原先不存在）</li>
+</ul>
+</li>
+<li>添加节点（node 父级   child 子级）<ul>
+<li>node.appendChild(child)：将一个节点添加到指定父节点列表的<strong>末尾</strong></li>
+<li>node.insertBefore(child，指定元素）：将一个节点添加到父节点<strong>指定子节点的前面</strong></li>
+</ul>
+</li>
+<li>删除节点（node 父级   child 子级）<ul>
+<li>node.removeChild(child)：从DOM中删除一个子节点，返回删除的节点</li>
+</ul>
+</li>
+<li>复制节点<ul>
+<li>node.cloneNode()：返回调用该方法的节点的一个副本 （括号参数为空或false，是浅拷贝，只复制标签不复制内容；括号里面为true，则还会   复制内容）</li>
+</ul>
+</li>
 </ul>
 
       
@@ -932,7 +982,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%AD%E6%B3%95%E6%8B%93%E5%B1%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">变量的语法拓展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.2.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.4.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.4.5.</span> <span class="nav-text">运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.</span> <span class="nav-text">JS 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">1.7.2.</span> <span class="nav-text">作用域链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.8.</span> <span class="nav-text">JS 预解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.</span> <span class="nav-text">JS 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">JS 对象的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.2.</span> <span class="nav-text">new关键字的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.3.</span> <span class="nav-text">遍历对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E7%9A%84%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.4.</span> <span class="nav-text">JS的内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.10.</span> <span class="nav-text">数据类型的内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-API%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">Web API阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">2.1.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">事件基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.3.</span> <span class="nav-text">操作元素</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%AD%E6%B3%95%E6%8B%93%E5%B1%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">变量的语法拓展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.2.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.4.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.4.5.</span> <span class="nav-text">运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.</span> <span class="nav-text">JS 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">1.7.2.</span> <span class="nav-text">作用域链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.8.</span> <span class="nav-text">JS 预解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.</span> <span class="nav-text">JS 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">JS 对象的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.2.</span> <span class="nav-text">new关键字的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.3.</span> <span class="nav-text">遍历对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E7%9A%84%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.4.</span> <span class="nav-text">JS的内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.10.</span> <span class="nav-text">数据类型的内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-API%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">Web API阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">2.1.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">事件基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.3.</span> <span class="nav-text">操作元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.4.</span> <span class="nav-text">节点操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
