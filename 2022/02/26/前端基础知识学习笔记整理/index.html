@@ -103,7 +103,7 @@
 <meta property="og:image" content="c:/Users/JayZ/Desktop/markdow图片/4.png">
 <meta property="og:image" content="c:/Users/JayZ/Desktop/markdow图片/5.png">
 <meta property="article:published_time" content="2022-02-26T06:49:35.000Z">
-<meta property="article:modified_time" content="2022-03-04T12:14:29.054Z">
+<meta property="article:modified_time" content="2022-03-05T13:50:57.530Z">
 <meta property="article:author" content="林卓">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -665,7 +665,7 @@
 </ul>
 <h2 id="数据类型的内存分配"><a href="#数据类型的内存分配" class="headerlink" title="数据类型的内存分配"></a>数据类型的内存分配</h2><ul>
 <li>简单类型（值类型）：储存的是值本身，<strong>数据值放在栈空间里面</strong></li>
-<li>复杂类型（引用类型）：变量在栈中储存的仅仅是地址十六进制（引用），堆里 的地址再指向堆里的数据<strong>（数据值放在堆空间里面）</strong></li>
+<li>复杂类型（引用类型）：变量在栈中储存的仅仅是地址十六进制（引用），栈里的地址再指向堆里的数据<strong>（数据值放在堆空间里面）</strong></li>
 <li><strong>我们把一个值类型的变量作为参数传给函数的形参时，其实是把变量在栈空间里的值复制了一份给形参，所以在方法内部对形参做任何修改，都不会影响到外部变量</strong></li>
 <li><strong>当我们把引用类型变量传给形参时，把栈空间里的地址也传过去，所以在方法内部对形参做任何修改，都会影响到外部变量</strong></li>
 </ul>
@@ -900,6 +900,7 @@
 <li>构造函数中this指向构造函数的实例</li>
 </ol>
 </li>
+<li>call()方法：可以改变this的指向</li>
 </ul>
 </li>
 </ol>
@@ -994,6 +995,168 @@
 <li><p>window.localStorage.clear（）：清空所有数据</p>
 </li>
 </ul>
+<h1 id="JS高级"><a href="#JS高级" class="headerlink" title="JS高级"></a>JS高级</h1><h2 id="面向对象编程介绍"><a href="#面向对象编程介绍" class="headerlink" title="面向对象编程介绍"></a>面向对象编程介绍</h2><ul>
+<li>面向过程：按照我们分析好了的步骤，按照步骤解决问题</li>
+<li>面向对象：是以对象功能来划分问题，而不是步骤：<ul>
+<li>特性：封装性 继承性 多态性</li>
+</ul>
+</li>
+</ul>
+<h2 id="ES6中的类和对象"><a href="#ES6中的类和对象" class="headerlink" title="ES6中的类和对象"></a>ES6中的类和对象</h2><ul>
+<li><p>面向对象的思维特点：</p>
+<ol>
+<li>抽取对象共用的属性和行为组织（封装）成一个类（模板）</li>
+<li>和类进行实例化，获取类的对象</li>
+</ol>
+</li>
+<li><p>ES6中新增了类的概念，可以使用<strong>class</strong>关键字声明一个类，之后以这个类来实例化对象</p>
+<ul>
+<li>类抽象了对象的公共部分，它泛指某一大类（class）</li>
+<li>对象特指某一个，通过类实例化一个具体的对象</li>
+</ul>
+</li>
+<li><p>创建类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class name&#123;</span><br><span class="line">	//class body</span><br><span class="line">&#125;</span><br><span class="line">var xx = new name();</span><br></pre></td></tr></table></figure></li>
+<li><p>类必须使用new实例化对象</p>
+</li>
+</ul>
+<h1 id="ES6-ES11篇"><a href="#ES6-ES11篇" class="headerlink" title="ES6-ES11篇"></a>ES6-ES11篇</h1><ul>
+<li>ES新特性其实指的是JavaScript的新特性</li>
+</ul>
+<h2 id="let声明变量以及声明特性"><a href="#let声明变量以及声明特性" class="headerlink" title="let声明变量以及声明特性"></a>let声明变量以及声明特性</h2><ul>
+<li>变量不能重复声明：同一变量名不能重复声明不同的值</li>
+<li><strong>块级作用域</strong>：let声明的变量只在所在代码块里使用 （if else while for中也存在）（不影响作用域链）</li>
+<li>不存在变量提升：let不存在变量提升</li>
+</ul>
+<h2 id="const声明常量以及特点"><a href="#const声明常量以及特点" class="headerlink" title="const声明常量以及特点"></a>const声明常量以及特点</h2><ul>
+<li>const一定要赋初始值</li>
+<li>一般常量使用大写（潜规则）</li>
+<li>常量的值不能修改</li>
+<li>也是块级作用域</li>
+<li>对于数组和对象的元素修改，不算做常量的修改，不会报错</li>
+</ul>
+<h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><ul>
+<li>` 反引号：反引号可声明字符串，可以出现字符串<ul>
+<li>可以直接进行变量的拼接：<code>$&#123;变量&#125;字符串内容</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="简化对象写法"><a href="#简化对象写法" class="headerlink" title="简化对象写法"></a>简化对象写法</h2><ul>
+<li>允许在大括号里面，直接写入变量和函数，作为对象的属性和方法（对象内方法的创建可以省略fuction）</li>
+</ul>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><ul>
+<li>箭头 =&gt;：声明函数：let fn = () =&gt; {   }  （小括号里形参）</li>
+<li>特性：<ol>
+<li><strong>this 是静态的：this始终指向函数声明时所在作用域下的this的值</strong></li>
+<li>不能作为构造实例化对象</li>
+<li>不能使用arguments变量（保存实参）</li>
+<li>箭头函数的简写：<ol>
+<li>省略小括号：当形参有且只有一个的时候</li>
+<li>省略花括号：当代码体只有一条语句的时候，此时return必须省略，而且语句的执行结果就是函数的返回值</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>箭头函数的运用场景：<ol>
+<li>适合与 this 无关的回调：定时器，数组的方法回调</li>
+<li>不适合与this有关的回调 ：（事件回调，对象的方法）</li>
+</ol>
+</li>
+</ul>
+<h2 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h2><ul>
+<li>ES6允许给函数参数赋值初始值（形参）（具有初始值的形参，一般位置要靠后）</li>
+<li>与结构赋值结合</li>
+</ul>
+<h2 id="rest参数"><a href="#rest参数" class="headerlink" title="rest参数"></a>rest参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function date(...args)&#123;</span><br><span class="line">	console.log(args);</span><br><span class="line">&#125;</span><br><span class="line">date(&#x27;阿娇&#x27;，&#x27;博智&#x27;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>rest参数必须要放到参数最后</li>
+</ul>
+<h2 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h2><ul>
+<li>… [数组或数组名]：能将[数组]转换为逗号分割的[参数序列]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const tfboys = [&#x27;爸爸&#x27;,&#x27;妈妈&#x27;,&#x27;儿子&#x27;]</span><br><span class="line">function chuanwan()&#123;</span><br><span class="line">	console.log(arguments); </span><br><span class="line">&#125;</span><br><span class="line">chunwan(...tfboys) // 等价于 chunwan(&#x27;爸爸&#x27;,&#x27;妈妈&#x27;,&#x27;儿子&#x27;)</span><br></pre></td></tr></table></figure></li>
+<li>运用：<ol>
+<li>数组的合并</li>
+<li>数组的克隆</li>
+<li>将伪数组转换为真数组</li>
+</ol>
+</li>
+</ul>
+<h2 id="Symbol的基本使用"><a href="#Symbol的基本使用" class="headerlink" title="Symbol的基本使用"></a>Symbol的基本使用</h2><ul>
+<li><p>一种新的数据类型，表示独一无二的值。<strong>是JS的第七种数据类型</strong></p>
+</li>
+<li><p>特点：</p>
+<ol>
+<li>Symbol的值是唯一的，用来解决命名冲突的问题</li>
+<li>Symbol值不能与其他数据进行运算</li>
+<li>Symbol定义的对象属性不能使用for in 循环遍历，但是可以使用Reflect.ownKeys来获取对象的所有键名</li>
+</ol>
+</li>
+<li><p>创建Symbol</p>
+<ol>
+<li>let s = Symbol()<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let s2 = Symbol(&#x27;尚硅谷&#x27;);</span><br><span class="line">let s3 = Symbol(&#x27;尚硅谷&#x27;)；</span><br><span class="line">console.log(s2 === s3) //false</span><br></pre></td></tr></table></figure></li>
+<li>let s4 = Symbol.for(‘尚硅谷’)；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let s4 = Symbol(&#x27;尚硅谷&#x27;);</span><br><span class="line">let s5 = Symbol(&#x27;尚硅谷&#x27;)；</span><br><span class="line">console.log(s4 === s5) //false</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>不能与其他数据类型比较和运算（包括Symbol自身的数据类型）</p>
+</li>
+<li><p>Symbol创建对象属性：</p>
+<ol>
+<li>向对象中添加方法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let youxi = &#123;</span><br><span class="line">	[Symbol(&#x27;say&#x27;)]: function()&#123;</span><br><span class="line">	xxxxxx</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>Symbol的内置值：</p>
+</li>
+</ul>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><ul>
+<li>是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署Iterator 接口，就可以完成遍历操作</li>
+<li>ES6创造了一种新的遍历命令for…of循环，iterator接口（对象的一个属性）主要供for…of消费</li>
+<li>原生具备iterator接口的数据（可用for of循环）：<ul>
+<li>Array  Arguments Set Map String TypedArray NodeList</li>
+</ul>
+</li>
+<li><strong>for of循环中变量保存的是键值，for in循环中变量保存的是键名</strong></li>
+<li>工作原理：<ol>
+<li>创建一个指针对象，指向当前数据结构的起始位置</li>
+<li>第一次调用对象的next方法，指针自动指向数据结构的第一个成员</li>
+<li>接下来不断调用nest方法，指针一直在往后移动，直到指向最后一个成员</li>
+<li>每调用nest方法返回一个包含value和done属性的对象</li>
+</ol>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><ol>
+<li>限定符：<ol>
+<li>? ：代表前面的字符可出现一次或0次</li>
+<li>*： 代表前面的字符可有可无，可多可少</li>
+<li>+：匹配出现<strong>一次以上</strong>的字符</li>
+<li>{2，6}：前面字符出现的次数在2-6之间</li>
+<li>（ab）：匹配ab字符</li>
+</ol>
+</li>
+<li>或运算符：<ul>
+<li> a (cat | dog)：匹配 a cat或 a dog</li>
+</ul>
+</li>
+<li>字符类：<ul>
+<li>[a-z]：匹配所有小写英文字符</li>
+<li>[a-zA-Z]：匹配所有英文字符</li>
+<li>[a-zA-Z0-9]：匹配所有英文字符和数字</li>
+<li>[^  ] ：匹配除了 ^ 后面列出的以外的字符</li>
+</ul>
+</li>
+<li>元字符：<ol>
+<li>/d：数字 （等于 [0-9]）（/D 非数字）</li>
+<li>/w：单词 （等于[a-z]）（/W 非单词）</li>
+<li>/s：空白符（包括tab和换行） （/S 非空白字符）</li>
+<li>. ：任意字符（不包括换行符）</li>
+<li>^a：匹配行首a</li>
+<li>$a：匹配行尾a</li>
+</ol>
+</li>
+<li>贪婪与懒惰匹配：<ol>
+<li> &lt;.+&gt;：正则表达式默认的贪婪匹配‘任意字符’</li>
+<li>&lt;.+?&gt;：懒惰匹配‘任意字符’</li>
+</ol>
+</li>
+</ol>
 <h1 id="jQuery篇"><a href="#jQuery篇" class="headerlink" title="jQuery篇"></a>jQuery篇</h1><ul>
 <li>JavaScript库：是一个封装好的特定的集合。</li>
 <li>jQuery：就是一个JS库，为了快速方便的操作DOM，里面基本都是函数（方法）</li>
@@ -1299,7 +1462,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%AD%E6%B3%95%E6%8B%93%E5%B1%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">变量的语法拓展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.2.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.4.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.4.5.</span> <span class="nav-text">运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.</span> <span class="nav-text">JS 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">1.7.2.</span> <span class="nav-text">作用域链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.8.</span> <span class="nav-text">JS 预解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.</span> <span class="nav-text">JS 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">JS 对象的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.2.</span> <span class="nav-text">new关键字的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.3.</span> <span class="nav-text">遍历对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E7%9A%84%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.4.</span> <span class="nav-text">JS的内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.10.</span> <span class="nav-text">数据类型的内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-API%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">Web API阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">2.1.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">事件基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.3.</span> <span class="nav-text">操作元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.4.</span> <span class="nav-text">节点操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7"><span class="nav-number">2.1.5.</span> <span class="nav-text">事件高级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM"><span class="nav-number">2.2.</span> <span class="nav-text">BOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#window%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.1.</span> <span class="nav-text">window对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%88%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">JS执行机制（异步与同步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.3.</span> <span class="nav-text">location对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.4.</span> <span class="nav-text">navigator对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#history%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.5.</span> <span class="nav-text">history对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88"><span class="nav-number">2.2.6.</span> <span class="nav-text">网页特效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">2.3.</span> <span class="nav-text">本地存储</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery%E7%AF%87"><span class="nav-number">3.</span> <span class="nav-text">jQuery篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">jQuery的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JQ%E5%B8%B8%E7%94%A8%E7%9A%84API"><span class="nav-number">3.1.1.</span> <span class="nav-text">JQ常用的API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax%E7%AF%87"><span class="nav-number">4.</span> <span class="nav-text">Ajax篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL%E5%9C%B0%E5%9D%80"><span class="nav-number">4.1.</span> <span class="nav-text">URL地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">客户端与服务器的通信过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E8%B5%84%E6%BA%90"><span class="nav-number">4.3.</span> <span class="nav-text">服务器对外提供了哪些资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3Ajax"><span class="nav-number">4.4.</span> <span class="nav-text">了解Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JQ-%E4%B8%AD%E7%9A%84Ajax"><span class="nav-number">4.5.</span> <span class="nav-text">JQ 中的Ajax</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%AF%BB"><span class="nav-number">1.1.</span> <span class="nav-text">导读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">变量的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%AD%E6%B3%95%E6%8B%93%E5%B1%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">变量的语法拓展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.2.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.4.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">1.4.5.</span> <span class="nav-text">运算符优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.</span> <span class="nav-text">JS 作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.7.1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="nav-number">1.7.2.</span> <span class="nav-text">作用域链</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E9%A2%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.8.</span> <span class="nav-text">JS 预解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.</span> <span class="nav-text">JS 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">JS 对象的创建方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.2.</span> <span class="nav-text">new关键字的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.3.</span> <span class="nav-text">遍历对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E7%9A%84%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.9.4.</span> <span class="nav-text">JS的内置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.10.</span> <span class="nav-text">数据类型的内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-API%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">Web API阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM"><span class="nav-number">2.1.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">事件基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.3.</span> <span class="nav-text">操作元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.4.</span> <span class="nav-text">节点操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7"><span class="nav-number">2.1.5.</span> <span class="nav-text">事件高级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM"><span class="nav-number">2.2.</span> <span class="nav-text">BOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#window%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.1.</span> <span class="nav-text">window对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%88%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">JS执行机制（异步与同步）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.3.</span> <span class="nav-text">location对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigator%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.4.</span> <span class="nav-text">navigator对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#history%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.5.</span> <span class="nav-text">history对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E7%89%B9%E6%95%88"><span class="nav-number">2.2.6.</span> <span class="nav-text">网页特效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">2.3.</span> <span class="nav-text">本地存储</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS%E9%AB%98%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">JS高级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.</span> <span class="nav-text">面向对象编程介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">ES6中的类和对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-ES11%E7%AF%87"><span class="nav-number">4.</span> <span class="nav-text">ES6-ES11篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#let%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E4%BB%A5%E5%8F%8A%E5%A3%B0%E6%98%8E%E7%89%B9%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">let声明变量以及声明特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const%E5%A3%B0%E6%98%8E%E5%B8%B8%E9%87%8F%E4%BB%A5%E5%8F%8A%E7%89%B9%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">const声明常量以及特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">4.3.</span> <span class="nav-text">变量的解构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.4.</span> <span class="nav-text">模板字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E5%AF%B9%E8%B1%A1%E5%86%99%E6%B3%95"><span class="nav-number">4.5.</span> <span class="nav-text">简化对象写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">4.6.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">4.7.</span> <span class="nav-text">参数默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rest%E5%8F%82%E6%95%B0"><span class="nav-number">4.8.</span> <span class="nav-text">rest参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.9.</span> <span class="nav-text">扩展运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.10.</span> <span class="nav-text">Symbol的基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">4.11.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.12.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery%E7%AF%87"><span class="nav-number">5.</span> <span class="nav-text">jQuery篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">jQuery的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JQ%E5%B8%B8%E7%94%A8%E7%9A%84API"><span class="nav-number">5.1.1.</span> <span class="nav-text">JQ常用的API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ajax%E7%AF%87"><span class="nav-number">6.</span> <span class="nav-text">Ajax篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL%E5%9C%B0%E5%9D%80"><span class="nav-number">6.1.</span> <span class="nav-text">URL地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%80%9A%E4%BF%A1%E8%BF%87%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">客户端与服务器的通信过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E4%BA%86%E5%93%AA%E4%BA%9B%E8%B5%84%E6%BA%90"><span class="nav-number">6.3.</span> <span class="nav-text">服务器对外提供了哪些资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3Ajax"><span class="nav-number">6.4.</span> <span class="nav-text">了解Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JQ-%E4%B8%AD%E7%9A%84Ajax"><span class="nav-number">6.5.</span> <span class="nav-text">JQ 中的Ajax</span></a></li></ol></li></ol></div>
             
 
           </div>
