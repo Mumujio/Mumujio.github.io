@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/4.png?raw=true">
 <meta property="og:image" content="c:/Users/JayZ/Desktop/markdow图片/5.png">
 <meta property="article:published_time" content="2022-02-26T06:49:35.000Z">
-<meta property="article:modified_time" content="2022-03-10T14:24:26.052Z">
+<meta property="article:modified_time" content="2022-03-11T13:06:50.879Z">
 <meta property="article:author" content="林卓">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -1204,7 +1204,7 @@
 <li>立即执行函数：this指向window</li>
 </ol>
 <ul>
-<li>改变函数内部的this指向：<ol>
+<li><strong>改变函数内部的this指向</strong>：<ol>
 <li>call()方法：call的主要作用可以实现继承        </li>
 <li>apply()方法：调用函数，改变函数的this指向：<ul>
 <li>fun.apply(thisArg,[argsArray])：（thisArg this的指向；[argsArrgs]  参数以数组形式传入）</li>
@@ -1375,7 +1375,7 @@
 </ol>
 <h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><ul>
 <li>` 反引号：反引号可声明字符串，可以出现字符串<ul>
-<li>可以直接进行变量的拼接：<code>$&#123;变量&#125;字符串内容</code></li>
+<li>可以直接进行变量的拼接：<code>$&#123;变量名&#125;字符串内容</code></li>
 </ul>
 </li>
 </ul>
@@ -1403,10 +1403,10 @@
 </ul>
 <h2 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h2><ul>
 <li>ES6允许给函数参数赋值初始值（形参）（具有初始值的形参，一般位置要靠后）</li>
-<li>与结构赋值结合</li>
+<li>与解构赋值结合</li>
 </ul>
-<h2 id="rest参数"><a href="#rest参数" class="headerlink" title="rest参数"></a>rest参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function date(...args)&#123;</span><br><span class="line">	console.log(args);</span><br><span class="line">&#125;</span><br><span class="line">date(&#x27;阿娇&#x27;，&#x27;博智&#x27;)</span><br></pre></td></tr></table></figure>
-<ul>
+<h2 id="rest参数"><a href="#rest参数" class="headerlink" title="rest参数"></a>rest参数</h2><ul>
+<li>用于获取函数的实参，用来代替arguments<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function date(...args)&#123;</span><br><span class="line">	console.log(args);</span><br><span class="line">&#125;</span><br><span class="line">date(&#x27;阿娇&#x27;，&#x27;博智&#x27;)</span><br></pre></td></tr></table></figure></li>
 <li>rest参数必须要放到参数最后</li>
 </ul>
 <h2 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h2><ul>
@@ -1700,7 +1700,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
