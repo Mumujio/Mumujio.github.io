@@ -90,17 +90,22 @@
 
 
 
-<meta name="description" content="Vue3.0ƪ����vue-cli�Ĺ��̽ṹ Vue3����е�ģ��ṹ����û�и���ǩ">
+<meta name="description" content="Vue3.0ƪ����vue-cli�Ĺ��̽ṹ Vue3����е�ģ��ṹ����û�и���ǩ �����¼���vue2.0����Compositon API������Ļ��setup   ���⣺Vue3.0��һ���µ������ֵΪһ������ setup������**Compositon API(���API) �����ݵ���̨�� ��������õ��ģ����">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue3.0">
 <meta property="og:url" content="http://example.com/2022/04/16/vue3-0/index.html">
 <meta property="og:site_name" content="木木卓的小窝">
-<meta property="og:description" content="Vue3.0ƪ����vue-cli�Ĺ��̽ṹ Vue3����е�ģ��ṹ����û�и���ǩ">
+<meta property="og:description" content="Vue3.0ƪ����vue-cli�Ĺ��̽ṹ Vue3����е�ģ��ṹ����û�и���ǩ �����¼���vue2.0����Compositon API������Ļ��setup   ���⣺Vue3.0��һ���µ������ֵΪһ������ setup������**Compositon API(���API) �����ݵ���̨�� ��������õ��ģ����">
 <meta property="og:locale">
+<meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.png?raw=true">
+<meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.png?raw=true">
+<meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%86%99%E6%B3%95.png?raw=true">
+<meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E7%9A%84watch%E5%87%BD%E6%95%B0.png?raw=true">
 <meta property="article:published_time" content="2022-04-16T09:12:04.000Z">
-<meta property="article:modified_time" content="2022-04-16T12:06:10.890Z">
+<meta property="article:modified_time" content="2022-06-29T06:41:50.639Z">
 <meta property="article:author" content="林卓">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.png?raw=true">
 
 
 
@@ -342,6 +347,123 @@
       
         <h1 id="Vue3-0ƪ"><a href="#Vue3-0ƪ" class="headerlink" title="Vue3.0ƪ"></a>Vue3.0ƪ</h1><h2 id="����vue-cli�L��̽u"><a href="#����vue-cli�L��̽u" class="headerlink" title="����vue-cli�Ĺ��̽ṹ"></a>����vue-cli�Ĺ��̽ṹ</h2><ul>
 <li>Vue3����е�ģ��ṹ����û�и���ǩ</li>
+<li>�����¼���vue2.0<h2 id="����Compositon-API"><a href="#����Compositon-API" class="headerlink" title="����Compositon API"></a>����Compositon API</h2><h3 id="������L��setup"><a href="#������L��setup" class="headerlink" title="������Ļ��setup"></a>������Ļ��setup</h3></li>
+</ul>
+<ol>
+<li>���⣺Vue3.0��һ���µ������ֵΪһ������</li>
+<li>setup������**Compositon API(���API) �����ݵ���̨��</li>
+<li>��������õ��ģ����ݡ������ȵȣ���Ҫ������setup��</li>
+<li>setup���������ַ���ֵ��<br>1.<em><strong>������һ������������е����ԡ���������ģ���о�����ֱ��ʹ��</strong></em><ol start="2">
+<li>������һ����Ⱦ������������Զ�����Ⱦ���ݣ��˽⣩</li>
+</ol>
+</li>
+<li>ע�⣺<ol>
+<li>������Ҫ��Vue2���û���</li>
+<li>setup������һ��async����</li>
+</ol>
+</li>
+</ol>
+<h3 id="ref����"><a href="#ref����" class="headerlink" title="ref����"></a>ref����</h3><ul>
+<li>���ã�����һ����Ӧʽ������</li>
+<li>�﷨��<ul>
+<li>����һ��������Ӧʽ���ݵ����ö���reference���󣬼��ref����</li>
+<li>JS�еĲ������ݣ�xxx.value</li>
+<li>ģ���ж�ȡ���ݣ�����Ҫ .value��ֱ�ӣ�<div></div></li>
+<li>��Ҫ import {ref} from ‘vue’</li>
+</ul>
+</li>
+<li>��ע��<ul>
+<li>���յ����ݿ����ǣ��������ͣ�Ҳ�����Ƕ�������</li>
+<li>�������͵����ݣ���Ӧʽ��Ȼ�ǿ� Obj.defineProperty() ��get��set��ɵ�</li>
+<li>�������͵����ݣ��ڲ��������ˡ�Vue3.0�е�һ����������reactive����</li>
+</ul>
+</li>
+</ul>
+<h3 id="reactive����"><a href="#reactive����" class="headerlink" title="reactive����"></a>reactive����</h3><ul>
+<li>���ã�����һ���������͵���Ӧʽ���ݣ��������Ͳ�Ҫ������Ҫ��ref������</li>
+<li>�﷨����const �������� = reactive Դ���󣩽���һ�����󣨻����飩������һ��<strong>��������proxy��ʵ�����󣬼��proxy����</strong><ul>
+<li>��Ҫ import {reactive} from ‘vue’</li>
+</ul>
+</li>
+<li>reactive�������Ӧʽ�����ǡ����εġ�</li>
+<li>�ڲ�����ES6��Proxyʵ�֣�ͨ�������������Դ�����ڲ����ݽ��в���</li>
+</ul>
+<h3 id="Vue3-0�е���Ӧʽԭ��"><a href="#Vue3-0�е���Ӧʽԭ��" class="headerlink" title="Vue3.0�е���Ӧʽԭ��"></a>Vue3.0�е���Ӧʽԭ��</h3><ol>
+<li>vue2.x����Ӧʽ</li>
+</ol>
+<ul>
+<li>ʵ��ԭ����<ul>
+<li>�������ͣ�ͨ�� Object.defineProperty() �����ԵĶ�ȡ���޸Ľ������أ����ݽٳ֣�</li>
+<li>�������ͣ�ͨ����д���������һϵ�з�����ʵ�����أ�������ı�����������˰�����<br><img src="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.png?raw=true"></li>
+</ul>
+</li>
+<li>�������⣺<ol>
+<li>�������ԡ�ɾ�����ԣ����治�����</li>
+<li>ֱ��ͨ���±��޸����飬���治���Զ�����</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li>Vue3.0��Ӧʽ</li>
+</ol>
+<ul>
+<li>ʵ��ԭ����<ul>
+<li>ͨ��Proxy�������������ض������������Եı仯������������ֵ�Ķ�д�����Ե����ӡ����Ե�ɾ����</li>
+<li>ͨ��Reflect�����䣩���Ա�������������Խ��в���<br><img src="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.png?raw=true"></li>
+</ul>
+</li>
+</ul>
+<h3 id="reactive�Ա�ref"><a href="#reactive�Ա�ref" class="headerlink" title="reactive�Ա�ref"></a>reactive�Ա�ref</h3><ul>
+<li>�Ӷ������ݽǶȶԱȣ�<ul>
+<li>ref�������壺������������</li>
+<li>reactive�������壺���󣨻����飩��������</li>
+<li>��ע��refҲ��������������󣨻����飩�������ݣ����ڲ����Զ�ͨ��reactiveתΪ��������</li>
+</ul>
+</li>
+<li>��ԭ���ǶȶԱȣ�<ul>
+<li>refͨ��Object.defineProperty()��get��set��ʵ����Ӧʽ�����ݽٳ֣�</li>
+<li>reactiveͨ��ʹ��Proxy��ʵ����Ӧʽ�����ݽٳ֣�����ͨ��Reflect����Դ�����ڲ�������</li>
+</ul>
+</li>
+<li>��ʹ�ýǶȶԱȣ�<ul>
+<li>ref��������ݣ�����������Ҫ .value����ȡ����ʱģ����ֱ�Ӷ�ȡ����Ҫ .value</li>
+<li>reactive��������ݣ������������ȡ���ݣ�������Ҫ .value</li>
+</ul>
+</li>
+</ul>
+<h3 id="setup������ע���"><a href="#setup������ע���" class="headerlink" title="setup������ע���"></a>setup������ע���</h3><ul>
+<li>setupִ�е�ʱ��<ul>
+<li>��beforeCreate֮ǰִ��һ�Σ�this��underfined</li>
+</ul>
+</li>
+<li>setup�Ĳ���<ul>
+<li>props��ֵΪ���󣬰���������ⲿ���ݹ�����������ڲ����������˵�����</li>
+<li>context�������Ķ���<ul>
+<li>attrs��ֵΪ���󣬰���������ⲿ���ݹ�������û����props���������������ԣ��൱�� this.$attrs   </li>
+<li>slots���յ��Ĳ�����ݣ��൱�� this.$slots</li>
+<li>emit���ַ��Զ����¼��ĺ������൱�� this.$emit</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="�������������"><a href="#�������������" class="headerlink" title="�������������"></a>�������������</h3><ol>
+<li><p>computed����</p>
+<ul>
+<li>��Vue2.x��computed���ù���һ��</li>
+<li>д����<br><img src="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E5%86%99%E6%B3%95.png?raw=true"></li>
+</ul>
+</li>
+<li><p>watch����</p>
+</li>
+</ol>
+<ul>
+<li>��Vue2.x��watch����</li>
+<li>������С�ӡ���<ul>
+<li>����reactive�������Ӧʽ����ʱ��oldValue�޷���ȷ��ȡ��ǿ�ƿ�������ȼ��ӣ�deep����ʧЧ��</li>
+<li>����reactive�������Ӧʽ������ĳ������ʱ��deep������Ч<br><img src="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/Vue3%E7%9A%84watch%E5%87%BD%E6%95%B0.png?raw=true"></li>
+</ul>
+</li>
 </ul>
 
       
@@ -405,6 +527,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/06/27/%E6%9A%91%E6%9C%9F%E6%80%BB%E7%BB%93/" rel="prev" title="暑期总结">
+                暑期总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -488,7 +614,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -553,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue3-0%C6%AA"><span class="nav-number">1.</span> <span class="nav-text">Vue3.0ƪ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDvue-cli%EF%BF%BDL%EF%BF%BD%EF%BF%BD%CC%BDu"><span class="nav-number">1.1.</span> <span class="nav-text">����vue-cli�Ĺ��̽ṹ</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue3-0%C6%AA"><span class="nav-number">1.</span> <span class="nav-text">Vue3.0ƪ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDvue-cli%EF%BF%BDL%EF%BF%BD%EF%BF%BD%CC%BDu"><span class="nav-number">1.1.</span> <span class="nav-text">����vue-cli�Ĺ��̽ṹ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDCompositon-API"><span class="nav-number">1.2.</span> <span class="nav-text">����Compositon API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDL%EF%BF%BD%EF%BF%BDsetup"><span class="nav-number">1.2.1.</span> <span class="nav-text">������Ļ��setup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="nav-number">1.2.2.</span> <span class="nav-text">ref����</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reactive%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="nav-number">1.2.3.</span> <span class="nav-text">reactive����</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue3-0%EF%BF%BD%D0%B5%EF%BF%BD%EF%BF%BD%EF%BF%BD%D3%A6%CA%BD%D4%AD%EF%BF%BD%EF%BF%BD"><span class="nav-number">1.2.4.</span> <span class="nav-text">Vue3.0�е���Ӧʽԭ��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reactive%EF%BF%BD%D4%B1%EF%BF%BDref"><span class="nav-number">1.2.5.</span> <span class="nav-text">reactive�Ա�ref</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%D7%A2%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="nav-number">1.2.6.</span> <span class="nav-text">setup������ע���</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD"><span class="nav-number">1.2.7.</span> <span class="nav-text">�������������</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
