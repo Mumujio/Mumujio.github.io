@@ -98,7 +98,7 @@
 <meta property="og:description" content="vue2.0篇第一天 前端工程化  npm init -y （快速创建package.json文件 这个个用来记录安装的包信息的文件 根目录必须是英文）（使用npm install安装后自动记录到package.json文件）  dependencies节点：放开发阶段及部署阶段用到的包  devDependencies节点：只在开发阶段用到的包  -s （-save 的缩写）  ;   -D （">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-03-23T14:35:52.000Z">
-<meta property="article:modified_time" content="2022-07-09T01:28:59.649Z">
+<meta property="article:modified_time" content="2022-08-03T07:53:06.412Z">
 <meta property="article:author" content="林卓">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -360,7 +360,7 @@
 </li>
 <li><p>项目中安装 Webpack：</p>
 <ul>
-<li>npm install <a href="mailto:&#x77;&#101;&#98;&#x70;&#x61;&#x63;&#107;&#x40;&#53;&#46;&#52;&#x32;&#46;&#49;">&#x77;&#101;&#98;&#x70;&#x61;&#x63;&#107;&#x40;&#53;&#46;&#52;&#x32;&#46;&#49;</a> <a href="mailto:&#x77;&#x65;&#x62;&#x70;&#97;&#x63;&#107;&#x2d;&#99;&#108;&#105;&#64;&#x34;&#x2e;&#x37;&#46;&#50;">&#x77;&#x65;&#x62;&#x70;&#97;&#x63;&#107;&#x2d;&#99;&#108;&#105;&#64;&#x34;&#x2e;&#x37;&#46;&#50;</a> -D</li>
+<li>npm install <a href="mailto:&#119;&#x65;&#98;&#112;&#x61;&#x63;&#107;&#x40;&#53;&#x2e;&#x34;&#50;&#46;&#49;">&#119;&#x65;&#98;&#112;&#x61;&#x63;&#107;&#x40;&#53;&#x2e;&#x34;&#50;&#46;&#49;</a> <a href="mailto:&#x77;&#x65;&#98;&#112;&#x61;&#x63;&#x6b;&#45;&#99;&#108;&#x69;&#x40;&#x34;&#46;&#x37;&#x2e;&#50;">&#x77;&#x65;&#98;&#112;&#x61;&#x63;&#x6b;&#45;&#99;&#108;&#x69;&#x40;&#x34;&#46;&#x37;&#x2e;&#50;</a> -D</li>
 </ul>
 </li>
 <li><p>webpack会生成dist文件夹main.js</p>
@@ -445,7 +445,7 @@
 </li>
 <li><p>事件修饰符：</p>
 <ol>
-<li><p>.prevent：阻止事件默认行为： &lt;<a href="mailto:&#97;&#64;&#x63;&#x6c;&#105;&#x63;&#107;&#x2e;&#112;&#x72;&#x65;&#118;&#x65;&#x6e;&#x74;">&#97;&#64;&#x63;&#x6c;&#105;&#x63;&#107;&#x2e;&#112;&#x72;&#x65;&#118;&#x65;&#x6e;&#x74;</a>=’xxx’&gt;链接</a></p>
+<li><p>.prevent：阻止事件默认行为： &lt;<a href="mailto:&#x61;&#64;&#99;&#108;&#105;&#99;&#x6b;&#46;&#112;&#x72;&#101;&#x76;&#x65;&#x6e;&#116;">&#x61;&#64;&#99;&#108;&#105;&#99;&#x6b;&#46;&#112;&#x72;&#101;&#x76;&#x65;&#x6e;&#116;</a>=’xxx’&gt;链接</a></p>
 </li>
 <li><p>.stop：阻止事件冒泡</p>
 </li>
@@ -463,7 +463,7 @@
 <li><p>条件渲染指令：</p>
 <ol>
 <li>v-show 的原理是：动态为元素添加或移除dispaly:none样式，来实现元素的显示和隐藏</li>
-<li>v-if 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏</li>
+<li>v-if 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏（操作DOM，有性能问题）</li>
 </ol>
 <ul>
 <li> 如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时v-if性能更好</li>
@@ -606,9 +606,170 @@ import { mapState } from 'vuex'
 <p>使用 getters 的第一种方式：<br>this.$store.getters.名称</p>
 <p>使用 getters 的第二种方式：<br>import { mapGetters } from ‘vuex’</p>
 <p>computed:{<br>    …mapGetters([‘showNum’])<br>}</p>
-<pre><code>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># vue2补充篇</span><br><span class="line">## 路由部分</span><br><span class="line">* $router 可以获取当前路由的信息，通过路由路径判断组件的显示与否</span><br><span class="line">* 配置路由可以加上路由的元信息 meta </span><br><span class="line">* 路由的传参：1. params （需要在被传入路由中占位） 2. query （不需要占位）</span><br></pre></td></tr></table></figure>
+<p>//路由传参例子<br>this.$router.push({name:’在路由中定义的名称’,params:{keyword:this.keyword},query:{k:this.keyword}})</p>
+<pre><code>   * **路由传参时，path不能结合params参数一起使用**
+   * 如果路由要求传递 params 参数，但是你就不传递 params 参数，URL会有问题
+      * 如何指定params参数可以传递或者不传递？  ---在配置路由的时候，在占位的后面加上一个问号
+      * 使用 undefined解决：parama参数可以传递、不传递（空字符串）
+
+## 组件的通信方式（6种）
+组件通信方式1：props
+使用场景:[父子通信]
+
+传递数据类型：
+1:可能是函数  -----------实质子组件想给父亲传递数据
+2:可能不是函数-----------实质就是父亲给子组件传递数据
+&lt;TodoList :todos=&quot;123&quot;  updateChecked=&quot;hander&quot;&gt;
+
+特殊情况：路由传递props
+1:布尔值类型，把路由中params参数映射为组件props数据
+2:对象，静态数据，很少用
+3:函数，可以把路由中params|query参数映射为组件props数据
+
+组件通信方式2:自定义事件   $emit  $on[简写@]
+事件:原生DOM事件----【click|mouseenter........】
+事件：自定义事件-----[子给父传递数据]
+
+组件通信方式3：$bus 全局事件总线----【万能】
+组件实例的原型的原型指向的Vue.prototype
+
+组件通信方式4：pubsub-js【发布订阅消息】*****在vue中根本不用【React】 ----万能
+
+组件通信方式5:Vuex[仓库]  -----数据非持久化----万能的
+
+核心概念：5
+state 
+mutations
+actions 
+getters 
+modules
+
+组件通信方式6：插槽-----父子通信【结构】
+slot
+
+默认插槽
+具名插槽
+作用域插槽:子组件的数据来源于父组件，但是子组件的自己的结构有父亲决定。
+
+watch|computed|method区别?
+&#123;
+    name:&#39;王二麻子&#39;,
+    eat:function()&#123;
+
+    &#125;
+&#125;
+
+1:事件相关的深入学习
+
+事件:事件已经学习过两种，第一种原生DOM事件，第二种自定义事件。
+
+&lt;Event1 @click=&quot;handler1&quot;&gt;&lt;/Event1&gt;
+组件绑定原生DOM事件，并非原生DOM事件，而是所谓的自定义事件。
+如果你想把自定义事件变为原生DOM事件，需要加上修饰符.native修饰
+这个修饰符，可以把自定义事件【名字：原生DOM类型的】变为原生DOM事件，
 
 
+7:v-model实现组件通信？
+
+v-model：指令，可以收集表单数据【text、radio、checkbox、range】等等
+切记：v-model收集checkbox需要用数组收集
+
+v-model:实现原理   :value  @input  还可以实现父子数据同步。
+&lt;CustomInput v-model=&quot;msg&quot;&gt;&lt;/CustomInput&gt;
+
+
+
+8:属性修饰符.sync，可以实现父子数据同步。
+以后在elementUI组件中出现，实现父子数据同步。
+
+
+
+
+9：$attrs与$listeners   ----vue-helper  父子组件通信
+$attrs：组件实例的属性，可以获取到父亲传递的props数据（前提子组件没有通过props接受）
+$listeners：组件实例的属性，可以获取到父亲传递自定义事件（对象形式呈现）
+
+
+
+10:$children与$parent       可以实现父子组件通信
+ref:可以在父组件内部获取子组件---实现父子通信
+$children:可以在父组件内部获取全部的子组件【返回数组】
+$parent:可以在子组件内部获取唯一的父组件【返回组件实例】
+
+
+
+第一种:props ----父子
+1:父子通信，props只读的
+2：写法三种【todos】 &#123;todos：Array&#125; &#123;todos：&#123;type:Arrat,default:[]&#125;&#125;
+3：路由props
+
+
+第二种:自定义事件
+1：子给父传递数据
+2：两种【简单写法|复杂写法】
+&lt;Todos @erha=&quot;handler&quot;&gt;
+&lt;Todos ref=&#39;erha&#39;&gt;
+mounted()&#123;
+  this.$refs.erha.$on(&#39;xx&#39;,callBack)
+&#125;
+
+
+3:全局事件总线  ---万能
+
+
+4：pubsub-js------万能
+
+
+5：vuex------万能
+
+
+6：v-model
+
+
+7：.sync
+
+
+8:$attrs|$listeners
+
+
+9:$children|$parent    ----ref
+
+
+
+10插槽 ------作用于插槽
+插槽：父子组件通信（HTML结构）
+插槽slot：
+默认插槽|具名插槽|作用于插槽
+
+作用域插槽:子组件的数据来源于父组件，但是子组件决定不了自身结构与外观。
+
+
+## Vue源码解析之mustache模板引擎
+* mustache是最早的模板引擎库，它的底层机理是非常有创造性和轰动性的
+![](https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/mustache%E5%BA%93%E7%9A%84%E6%9C%BA%E7%90%86.png?raw=true)
+* tokens是一个JS的嵌套数组，就是**模板字符串的JS表示**
+* 它是“抽象语法树”、“虚拟节点”等等的开山鼻祖
+* mustache库底层重点要做的两件事：
+   1. 将模板字符串编译为tokens形式
+   2. 将tokens结合数据，解析为dom字符串
+
+## 虚拟DOM和diff算法
+* diff（精细化更新）：
+   1. key 很重要。key是这个节点的唯一标识，告诉diff算法，在更改前后它们是同一DOM节点
+   2. 只有同一个虚拟节点，才进行精细化比较。否则就暴力拆除，插入新的。
+   3. 如何定义是同一个虚拟节点？ 选择器相同且key相同
+   4. 只进行同层比较，不进行跨层比较
+* snabbdom是著名的虚拟DOM库，是diff算法的鼻祖，Vue源码借鉴了snabbdom
+### h函数
+* 虚拟DOM：用JS对象描述DOM的层次结构。DOM中的一切属性都在虚拟DOM中有对应的属性
+* 新虚拟DOM和老虚拟DOM进行diff（精细化比较），算出应该如何最小量更新，最后反映到真正的DOM上
+* h函数用来产生虚拟节点（vnode）。可以嵌套使用h函数
+### patch函数
+![](https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/patch%E5%87%BD%E6%95%B0%E6%B5%81%E7%A8%8B.png?raw=true)
+
+## 其它
+* vue插件一定是一个对象，而且这个对象一定要有install方法。Vue.use(xx) 实际上是调用了插件的install方法
 
 
 
