@@ -348,17 +348,12 @@
 创建相机
 添加物体
 初始化渲染器
-使用渲染器，通过相机将场景渲染进来控制器
+使用渲染器，通过相机将场景渲染进来场景
 
 
-轨道控制器（OrbitControls）：使用控制器查看3d物体坐标轴辅助器
-Helper时钟构造函数
-Clock标准网格材质
-MeshStandardMaterial：一种基于物理的标准材质环境光
-AmbientLight：环境光会均匀的照亮场景中的所有物体。
-
-
-          
+scene.background = envMap ( cubeTextureLoader )：设置环境贴图
+scene.traverse( (child = &gt;{}) ) ：遍历获得所有模型，包括里面嵌套的。并进行操作12345scene.traverse((child)=&gt;&#123;	if(child intanceof THREE.Mesh &amp;&amp; child.material instanceof THREE.M
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2022/09/04/three-js%E5%AD%A6%E4%B9%A0/#more" rel="contents">
