@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/nginx%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%8E%9F%E7%90%86.png?raw=true">
 <meta property="og:image" content="https://github.com/Mumujio/photoRepository/raw/master/github%E5%9B%BE%E7%89%87/photo/%E4%B8%BB%E6%B5%81%E7%9A%84WEBGL.png?raw=true">
 <meta property="article:published_time" content="2022-02-26T06:49:35.000Z">
-<meta property="article:modified_time" content="2022-07-24T02:32:16.643Z">
+<meta property="article:modified_time" content="2022-12-09T01:44:16.974Z">
 <meta property="article:author" content="林卓">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
@@ -1761,6 +1761,16 @@
 <h2 id="proxy代理拦截"><a href="#proxy代理拦截" class="headerlink" title="proxy代理拦截"></a>proxy代理拦截</h2><ul>
 <li>基本形式：可对对象、数组、函数进行拦截<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const hd =&#123; name:&#x27;后盾人&#x27; &#125;</span><br><span class="line">const proxy = new Proxy(hd,&#123;</span><br><span class="line">	get(obj,property)&#123;</span><br><span class="line">		// obj 是该对象，property 是属性</span><br><span class="line">		return obj[property]</span><br><span class="line">	&#125;,</span><br><span class="line">	set(obj,property,value)&#123;</span><br><span class="line">		obj[property] = value;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
 </ul>
+<h1 id="git篇"><a href="#git篇" class="headerlink" title="git篇"></a>git篇</h1><h2 id="多人合作开发流程"><a href="#多人合作开发流程" class="headerlink" title="多人合作开发流程"></a>多人合作开发流程</h2><ol>
+<li>feature分支：git add + git commit （保存修改版本至本地仓库）</li>
+<li>切换到master分支：git checkout master</li>
+<li>git pull origin master（同步远程主分支的代码至master分支）</li>
+<li>切换到feature分支：git checkout feature</li>
+<li>git merge master（合并已经同步远程主分支的本地主分支commit）</li>
+<li>此时如有冲突则解决冲突，并再次 add + commit</li>
+<li>推送至远程仓库：git pull origin feature</li>
+<li>gitlab中发送合并主分支请求</li>
+</ol>
 
       
     </div>
